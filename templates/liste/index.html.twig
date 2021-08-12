@@ -12,14 +12,14 @@
 <div class="row">
         {% for liste in listeListe %}
         <div class="col-sm-3">
-            <div id="liste" class="card" style="width: 18rem; height: 11rem; margin-bottom: 20px;">
+            <div id="liste" data-id="{{ liste.id }}" class="card" style="width: 18rem; height: 11rem; margin-bottom: 20px;">
                 <div class="card-body">
                     <h5 class="card-title" style="text-align: center;">{{ liste.Nom }}</h5>
                     <p class="card-text">{{ liste.Description }}</p>
                     </div>
                 <div class="card-footer">
                     <a href="{{ path('listes-details', {id: liste.id}) }}" class="btn btn-primary btn-sm">Voir la liste</a>
-                    <a href="{{ path('liste-suppression', {id: liste.id}) }}" class="btn btn-danger btn-sm">Supprimer</a>
+                    <a href="{{ path('liste-suppression', {id: liste.id}) }}" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette liste ainsi que toutes ses tâches associèes ?')">Supprimer</a>
                     <a href="#" class="btn btn-warning btn-sm">Modifier</a>
                 </div>
             </div>

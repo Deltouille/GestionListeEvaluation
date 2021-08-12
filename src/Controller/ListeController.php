@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use App\Entity\Liste;
 use App\Entity\Tache;
 use App\Form\ListeType;
@@ -85,18 +86,22 @@ class ListeController extends AbstractController
      * @Method({"DELETE"})
      */
     public function Delete(Request $request, int $id){
-       //On récupere l'entity manager
-       $em = $this->getDoctrine()->getManager();
-       //On récupere le repository de la classe Liste
-       $listeRepository = $em->getRepository(Liste::class);
-       //On récupere la liste séléctionnée 
-       $listeDetails = $listeRepository->find($id);
+      //On récupere l'entity manager
+      $em = $this->getDoctrine()->getManager();
+      //On récupere le repository de la classe Liste
+      $listeRepository = $em->getRepository(Liste::class);
+      //On récupere la liste séléctionnée 
+      $listeSuppression = $listeRepository->find($id);
 
-       //On récupere l'entity manager
-       $em = $this->getDoctrine()->getManager();
-       //On enregistre la nouvelle liste dans la base de données
-       $em->remove($liste);
-       $em->flush();
+      foreach($listeSuppression->getTache() as $tache){
+        $em->remove($tache);
+      }
+       
+      //On enregistre la nouvelle liste dans la base de données
+      $em->remove($listeSuppression);
+      $em->flush();
+
+      return $this->redirectToRoute('listes');
 
     }
 }
