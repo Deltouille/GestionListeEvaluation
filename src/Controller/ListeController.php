@@ -77,8 +77,35 @@ class ListeController extends AbstractController
         ]);
     }
 
-    public function Update(){
-
+    /**
+     * @Route("/liste-update/{id}", name="liste-modification")
+     */
+    public function Update(Request $request, int $id){
+        //On récupere l'entity manager
+        $em = $this->getDoctrine()->getManager();
+        //On récupere le repository de la classe Liste
+        $listeRepository = $em->getRepository(Liste::class);
+        //On récupere la liste séléctionnée 
+        $listeModification = $listeRepository->find($id);
+        //On créer un nouveau formulaire
+        $form = $this->createForm(ListeType::class, $listeModification);
+        //On regarde si le formulaire a été envoyé avec une méthode POST
+        if($request->isMethod('POST')){
+            $form->handleRequest($request);
+            //On vérifie que le formulaire a bien été envoyé et qu'il est valide
+            if($form->isSubmitted() && $form->isValid()){
+                //On enregistre la nouvelle liste dans la base de données
+                $em->persist($listeModification);
+                $em->flush();
+                //On redirige sur la page qui affiche toutes les listes
+                return $this->redirectToRoute('listes');
+            }
+        }
+        //On affiche la page d'ajout d'une liste
+        return $this->render('liste/modificationListe.html.twig', [
+            'listeModification' => $listeModification,
+            'form' => $form->createView(),
+        ]);
     }
 
     /**

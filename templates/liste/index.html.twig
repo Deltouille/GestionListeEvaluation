@@ -20,7 +20,7 @@
                 <div class="card-footer">
                     <a href="{{ path('listes-details', {id: liste.id}) }}" class="btn btn-primary btn-sm">Voir la liste</a>
                     <a href="{{ path('liste-suppression', {id: liste.id}) }}" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette liste ainsi que toutes ses tâches associèes ?')">Supprimer</a>
-                    <a href="#" class="btn btn-warning btn-sm">Modifier</a>
+                    <a href="{{ path('liste-modification', {id: liste.id}) }}" class="btn btn-warning btn-sm">Modifier</a>
                 </div>
             </div>
         </div>
