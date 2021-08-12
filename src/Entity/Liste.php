@@ -29,6 +29,11 @@ class Liste
      */
     private $Tache;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $Description;
+
     public function __construct()
     {
         $this->Tache = new ArrayCollection();
@@ -77,6 +82,18 @@ class Liste
                 $tache->setListe(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->Description;
+    }
+
+    public function setDescription(string $Description): self
+    {
+        $this->Description = $Description;
 
         return $this;
     }

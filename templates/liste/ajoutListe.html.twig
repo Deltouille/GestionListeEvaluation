@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+{% block title%}
+
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+<div>
+    <div class="pull-right">
+        </div>
+        <h1>Ajout d'une liste</h1>
+        <hr />
+        {{ include('liste/formulaireListe.html.twig')}}
+        
+        <a href="{{ path('listes') }}" class="btn btn-default">
+            <i class="glyphicon glyphicon-chevron-left">Retour aux listes</i>
+        </a>
+    </div>
+</html>
+{% endblock %}
