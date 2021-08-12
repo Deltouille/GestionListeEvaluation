@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Liste;
+use App\Entity\Tache;
 use App\Form\ListeType;
 
 class ListeController extends AbstractController
@@ -79,7 +80,23 @@ class ListeController extends AbstractController
 
     }
 
-    public function Delete(){
+    /**
+     * @Route("/liste-suppression/{id}", name="liste-suppression")
+     * @Method({"DELETE"})
+     */
+    public function Delete(Request $request, int $id){
+       //On récupere l'entity manager
+       $em = $this->getDoctrine()->getManager();
+       //On récupere le repository de la classe Liste
+       $listeRepository = $em->getRepository(Liste::class);
+       //On récupere la liste séléctionnée 
+       $listeDetails = $listeRepository->find($id);
+
+       //On récupere l'entity manager
+       $em = $this->getDoctrine()->getManager();
+       //On enregistre la nouvelle liste dans la base de données
+       $em->remove($liste);
+       $em->flush();
 
     }
 }

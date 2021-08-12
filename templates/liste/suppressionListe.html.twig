@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+{% block title%}
+    Gestion des listes
+{% endblock %}
+
+{% block body %}
+{{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}   
+{# Les erreurs générales du formulaire #}
+{{ form_errors(form) }}
+
+<h2>Supprimer la liste : {{ listeSuppression.Nom }}</h2>
+
+<p style="text-align: center;">
+    Etes-vous certain de vouloir supprimer la liste <b>{{ listeSuppression.Nom }}</b> et les tâches associées ?<br/>
+    <br/>
+    {% if tacheAssociees is not empty %}
+        <b>Tâches associées : </b></br>
+            {% for laTache in tacheAssociees %}
+                    <b>Nom :</b> {{ laTache.Nom }}<br/>
+            {% endfor %}
+    {% elseif tacheAssociees is empty %}
+                 Aucunes tâches associées 
+    {% endif %}
+</p>
+
+        {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
+        {{ form_widget(form.Sauvegarder, {'attr': {'class': 'btn btn-primary'}}) }}
+        {# Fermeture de la balise <form> de formulaire HTML #}
+        {{ form_end(form) }}
+
+{% endblock %}
