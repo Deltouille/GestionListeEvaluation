@@ -12,7 +12,7 @@
     <div class="pull-right">
     </div>
     <h1>Tache de la {{ listeDetails.Nom}}
-        <a href ="#" class ="btn btn-sm btn-success" style="float: right;">
+        <a href ="{{ path('tache-ajout') }}" class ="btn btn-sm btn-success" style="float: right;">
             <i class ="glyphicon glyphicon-edit" >
             Ajouter une Tache
             </i>
@@ -34,12 +34,11 @@
                 <td style="text-align: center;">{{ tache.Nom }}</td>
                 <td style="text-align: center;">{{ tache.Statut }}</td>
                 <td style="text-align: center;">
-                    <a class="suppression btn btn-danger" style="text-align: center; margin-bottom: 1em;">
+                    <a class="suppression btn btn-danger btn-sm" style="text-align: center;">
                         <i class ="glyphicon glyphicon-chevron-left"></i>
                         Supprimer la tache
                     </a>
-                    <p>
-                    <a class="btn btn-primary" href="#" style="text-align: center;">
+                    <a class="btn btn-primary btn-sm" href="#" style="text-align: center;">
                         <i class ="glyphicon glyphicon-chevron-left"></i>
                         Modifier la tache
                     </a>

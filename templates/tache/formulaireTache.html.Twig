@@ -8,7 +8,7 @@
         {{ form_errors(form) }}
 
         {# Génération manuelle du formulaire #}
-        {# Nom de la liste #}
+        {# Nom de la tache #}
         <div class="form-group">
             {# Génération du label #}
             {{ form_label(form.Nom, "Nom de la liste", {'label_attr': {'class': 'cal-sm-2 control-label'}}) }}
@@ -19,15 +19,26 @@
                 {{ form_widget(form.Nom, {'attr': {'class': 'form-control'}}) }}
             </div>
         </div>
-        {# Description de la liste #}
+        {# Nom de la tache #}
         <div class="form-group">
             {# Génération du label #}
-            {{ form_label(form.Description, "Description de la liste", {'label_attr': {'class': 'cal-sm-2 control-label'}}) }}
+            {{ form_label(form.Statut, "Description de la liste", {'label_attr': {'class': 'cal-sm-2 control-label'}}) }}
             {# Affichage des erreurs pour ce champ précis #}
-            {{ form_errors(form.Description) }}
+            {{ form_errors(form.Statut) }}
             <div class="col-sm-10">
                 {# Génération de l'input. #}
-                {{ form_widget(form.Description, {'attr': {'class': 'form-control'}}) }}
+                {{ form_widget(form.Statut, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        {# Liste associée de la tache #}
+        <div class="form-group">
+            {# Génération du label #}
+            {{ form_label(form.Liste, "Description de la liste", {'label_attr': {'class': 'cal-sm-2 control-label'}}) }}
+            {# Affichage des erreurs pour ce champ précis #}
+            {{ form_errors(form.Liste) }}
+            <div class="col-sm-10">
+                {# Génération de l'input. #}
+                {{ form_widget(form.Liste, {'attr': {'class': 'form-control'}}) }}
             </div>
         </div>
 

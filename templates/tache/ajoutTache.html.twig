@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+{% block title%}
+
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+<div>
+    <div class="pull-right">
+        </div>
+        <h1>Ajout d'une liste</h1>
+        <hr />
+        {{ include('tache/formulaireTache.html.twig')}}
+        
+        <a href="{{ path('tache') }}" class="btn btn-default">
+            <i class="glyphicon glyphicon-chevron-left">Retour aux taches</i>
+        </a>
+    </div>
+</html>
+{% endblock %}

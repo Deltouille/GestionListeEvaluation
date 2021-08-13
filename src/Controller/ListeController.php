@@ -40,12 +40,10 @@ class ListeController extends AbstractController
         $listeRepository = $em->getRepository(Liste::class);
         //On récupere la liste séléctionnée 
         $listeDetails = $listeRepository->find($id);
-        //dd($listeDetails);
-        //On affiche la page du détails de l'agent
+        //On affiche la page du détails de la liste
         return $this->render('liste/details.html.twig', [
             'listeDetails' => $listeDetails,
         ]);
-
     }
 
     /**
@@ -112,7 +110,7 @@ class ListeController extends AbstractController
      * @Route("/liste-suppression/{id}", name="liste-suppression")
      * @Method({"DELETE"})
      */
-    public function Delete(Request $request, int $id){
+    public function Delete(int $id){
       //On récupere l'entity manager
       $em = $this->getDoctrine()->getManager();
       //On récupere le repository de la classe Liste
@@ -123,8 +121,7 @@ class ListeController extends AbstractController
       foreach($listeSuppression->getTache() as $tache){
         $em->remove($tache);
       }
-       
-      //On enregistre la nouvelle liste dans la base de données
+      //On supprime la liste de la base de données
       $em->remove($listeSuppression);
       $em->flush();
 
