@@ -41,7 +41,7 @@ class ListeController extends AbstractController
         $listeRepository = $em->getRepository(Liste::class);
         //On récupere la liste séléctionnée 
         $listeDetails = $listeRepository->find($id);
-        //On verifie que l'agent existe
+        //On verifie que la liste existe
         if($listeDetails === null){
             return $this->redirectToRoute('redirection');
         }
@@ -90,6 +90,10 @@ class ListeController extends AbstractController
         $listeRepository = $em->getRepository(Liste::class);
         //On récupere la liste séléctionnée 
         $listeModification = $listeRepository->find($id);
+        //On verifie que la liste existe
+        if($listeModification === null){
+            return $this->redirectToRoute('redirection');
+        }
         //On créer un nouveau formulaire
         $form = $this->createForm(ListeType::class, $listeModification);
         //On regarde si le formulaire a été envoyé avec une méthode POST
@@ -116,21 +120,25 @@ class ListeController extends AbstractController
      * @Method({"DELETE"})
      */
     public function Delete(int $id){
-      //On récupere l'entity manager
-      $em = $this->getDoctrine()->getManager();
-      //On récupere le repository de la classe Liste
-      $listeRepository = $em->getRepository(Liste::class);
-      //On récupere la liste séléctionnée 
-      $listeSuppression = $listeRepository->find($id);
+        //On récupere l'entity manager
+        $em = $this->getDoctrine()->getManager();
+        //On récupere le repository de la classe Liste
+        $listeRepository = $em->getRepository(Liste::class);
+        //On récupere la liste séléctionnée 
+        $listeSuppression = $listeRepository->find($id);
+        //On verifie que la liste existe
+        if($listeModification === null){
+            return $this->redirectToRoute('redirection');
+        }
+        
+        foreach($listeSuppression->getTache() as $tache){
+            $em->remove($tache);
+        }
+        //On supprime la liste de la base de données
+        $em->remove($listeSuppression);
+        $em->flush();
 
-      foreach($listeSuppression->getTache() as $tache){
-        $em->remove($tache);
-      }
-      //On supprime la liste de la base de données
-      $em->remove($listeSuppression);
-      $em->flush();
-
-      return $this->redirectToRoute('listes');
+        return $this->redirectToRoute('listes');
     }
 
     /**
