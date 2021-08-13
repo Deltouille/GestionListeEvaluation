@@ -24,6 +24,7 @@ class ListeController extends AbstractController
         $listeRepository = $em->getRepository(Liste::class);
         //On récupere toutes les listes présentes dans la base de données
         $listeListe = $listeRepository->findAll();
+        //dd($listeListe);
         //On affiche toutes les listes
         return $this->render('liste/index.html.twig', [
             'listeListe' => $listeListe,
@@ -40,6 +41,10 @@ class ListeController extends AbstractController
         $listeRepository = $em->getRepository(Liste::class);
         //On récupere la liste séléctionnée 
         $listeDetails = $listeRepository->find($id);
+        //On verifie que l'agent existe
+        if($listeDetails === null){
+            return $this->redirectToRoute('redirection');
+        }
         //On affiche la page du détails de la liste
         return $this->render('liste/details.html.twig', [
             'listeDetails' => $listeDetails,
@@ -126,6 +131,13 @@ class ListeController extends AbstractController
       $em->flush();
 
       return $this->redirectToRoute('listes');
-
     }
+
+    /**
+     * @Route("/redirection", name="redirection")
+     */
+    public function redirection(){
+        return $this->render('liste/erreurRedirection.html.twig');
+    }
+
 }

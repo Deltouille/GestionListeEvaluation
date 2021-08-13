@@ -120,4 +120,23 @@ class TacheController extends AbstractController
 
         return $this->redirectToRoute('tache');
     }
+
+    /**
+     * @Route("/tache-modification-statut/{id}", name="tache-modification-statut")
+     */
+    public function updateStatut(Request $request, int $id){
+        //On récupere l'entity manager
+        $em = $this->getDoctrine()->getManager();
+        //On récupere le repository de la classe Tache
+        $tacheRepository = $em->getRepository(Tache::class);
+        //On récupere la liste séléctionnée 
+        $tacheModificationStatut = $tacheRepository->find($id);
+        //On update le champ statut
+        $tacheModificationStatut->setStatut($_POST['statut']);
+        //On persist dans la base de données
+        $em->persist($tacheModificationStatut);
+        $em->flush();
+        //On redirige sur la page qui affiche toutes les taches
+        return $this->redirectToRoute('listes-details', ['id' => $tacheModificationStatut->getListe()->getId()]);
+    }
 }

@@ -12,7 +12,7 @@
     <div class="pull-right">
     </div>
     <h1>Tache de la {{ listeDetails.Nom}}
-        <a href ="{{ path('tache-ajout') }}" class ="btn btn-sm btn-success" style="float: right;">
+        <a href ="{{ path('tache-ajout')}}" class ="btn btn-sm btn-success" style="float: right;">
             <i class ="glyphicon glyphicon-edit" >
             Ajouter une Tache
             </i>
@@ -32,19 +32,27 @@
             <tr>
                 {% for tache in listeDetails.Tache %}
                 <td style="text-align: center;">{{ tache.Nom }}</td>
-                <td style="text-align: center;">{{ tache.Statut }}</td>
+                <td style="text-align: center;">{{ tache.Statut }}  
+                <form action="{{ path('tache-modification-statut', {'id': tache.id }) }}" method="post" style="text-align: center;">
+                        {% if tache.Statut == 'A Faire' %}
+                            <input type="submit" name="statut" value="En Cours" class="btn btn-warning" />
+                        {% elseif tache.Statut == 'En Cours' %}
+                            <input type="submit" name="statut" value="Terminé" class="btn btn-primary" />
+                        {% endif %}
+                    </form>
+                </td>
                 <td style="text-align: center;">
-                    <a class="suppression btn btn-danger btn-sm" style="text-align: center;">
+                    <a class="suppression btn btn-danger btn-sm" style="text-align: center;" href="{{ path('tache-suppression', {id: tache.id}) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette tâche ?')">
                         <i class ="glyphicon glyphicon-chevron-left"></i>
                         Supprimer la tache
                     </a>
-                    <a class="btn btn-primary btn-sm" href="#" style="text-align: center;">
+                    <a class="btn btn-primary btn-sm" href="{{ path('tache-modification', {id: tache.id}) }}" style="text-align: center;">
                         <i class ="glyphicon glyphicon-chevron-left"></i>
                         Modifier la tache
                     </a>
                 </td>
-                {% endfor %}
             </tr>
+            {% endfor %}
         </tbody>
     </table>
 </div>

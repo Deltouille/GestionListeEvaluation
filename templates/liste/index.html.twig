@@ -14,14 +14,14 @@
         <div class="col-sm-3">
             <div id="liste" data-id="{{ liste.id }}" class="card" style="width: 18rem; height: 15rem; margin-bottom: 20px;">
             <div class="card-footer">
-                <div class="progress">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progressbar">
+                    <progress id="prog" max="100" value="{{ Progression(liste.Tache) }}" style="width: 100%"/>
                 </div>
             </div>
                 <div class="card-body">
                     <h5 class="card-title" style="text-align: center;">{{ liste.Nom }}</h5>
                     <p class="card-text">{{ liste.Description }}</p>
-                    </div>
+                </div>
                 <div class="card-footer">
                     <a href="{{ path('listes-details', {id: liste.id}) }}" class="btn btn-primary btn-sm">Voir la liste</a>
                     <a href="{{ path('liste-suppression', {id: liste.id}) }}" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette liste ainsi que toutes ses tâches associèes ?')">Supprimer</a>
