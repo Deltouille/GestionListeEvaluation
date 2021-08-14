@@ -20,6 +20,10 @@
     </h1>
 
     <hr />
+    <h4 style="text-align: center;">Nombre de tâches a faire : <b style="color: red;">{{ getStatutToDo(listeTache) }}</b> |
+    Nombre de tâches en cours : <b style="color: orange;">{{ getStatutEnCours(listeTache) }}</b> |
+    Nombre de tâches terminé : <b style="color: green;">{{ getStatutTermine(listeTache) }}</b></h4>
+    <p>
     <table id="table" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
@@ -42,7 +46,7 @@
                         {% endif %}
                     </form>
                 </td>
-                <td style="text-align: center;">{{ tache.getListe.getNom }}</td>
+                <td style="text-align: center;"><a href="{{ path('listes-details', {'id': tache.getListe.getId }) }}">{{ tache.getListe.getNom }}</a></td>
                 <td style="text-align: center;">
                     <a class="btn btn-outline-danger btn-sm" href="{{ path('tache-suppression', {id: tache.id}) }}" style="text-align: center;" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette tâche ?')">
                         <i class ="glyphicon glyphicon-chevron-left"></i>
