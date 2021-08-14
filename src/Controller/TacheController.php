@@ -38,6 +38,10 @@ class TacheController extends AbstractController
         $tacheRepository = $em->getRepository(Tache::class);
         //On récupere la tache séléctionnée 
         $tacheDetails = $tacheRepository->find($id);
+        //On verifie que la tache existe
+        if($tacheDetails === null){
+            return $this->redirectToRoute('redirection-tache');
+        }
         //On affiche la page du détails de la tache
         return $this->render('tache/details.html.twig', [
             'tacheDetails' => $tacheDetails,
@@ -63,7 +67,7 @@ class TacheController extends AbstractController
                 $em->persist($tache);
                 $em->flush();
                 //On redirige sur la page qui affiche toutes les taches
-                return $this->redirectToRoute('tache');
+                return $this->redirectToRoute('listes-details', ['id' => $tache->getListe()->getId()]);
             }
         }
         //On affiche la page d'ajout d'une tache
@@ -83,6 +87,10 @@ class TacheController extends AbstractController
         $tacheRepository = $em->getRepository(Tache::class);
         //On récupere la tache séléctionnée 
         $tacheModification = $tacheRepository->find($id);
+        //On verifie que la tache existe
+        if($tacheModification === null){
+            return $this->redirectToRoute('redirection-tache');
+        }
         //On créer un nouveau formulaire
         $form = $this->createForm(TacheType::class, $tacheModification);
         //On regarde si le formulaire a été envoyé avec une méthode POST
@@ -94,7 +102,7 @@ class TacheController extends AbstractController
                 $em->persist($tacheModification);
                 $em->flush();
                 //On redirige sur la page qui affiche toutes les taches
-                return $this->redirectToRoute('tache');
+                return $this->redirectToRoute('listes-details', ['id' => $tacheModification->getListe()->getId()]);
             }
         }
         //On affiche la page d'ajout d'une tache
@@ -114,11 +122,15 @@ class TacheController extends AbstractController
         $tacheRepository = $em->getRepository(Tache::class);
         //On récupere la liste séléctionnée 
         $tacheSuppression = $tacheRepository->find($id);
+        //On verifie que la tache existe
+        if($tacheSuppression === null){
+            return $this->redirectToRoute('redirection-tache');
+        }
         //On supprime la tache de la base de données
         $em->remove($tacheSuppression);
         $em->flush();
 
-        return $this->redirectToRoute('tache');
+        return $this->redirectToRoute('listes-details', ['id' => $tacheSuppression->getListe()->getId()]);
     }
 
     /**
@@ -131,6 +143,10 @@ class TacheController extends AbstractController
         $tacheRepository = $em->getRepository(Tache::class);
         //On récupere la liste séléctionnée 
         $tacheModificationStatut = $tacheRepository->find($id);
+        //On verifie que la tache existe
+        if($tacheModificationStatut === null){
+            return $this->redirectToRoute('redirection-tache');
+        }
         //On update le champ statut
         $tacheModificationStatut->setStatut($_POST['statut']);
         //On persist dans la base de données
@@ -138,5 +154,12 @@ class TacheController extends AbstractController
         $em->flush();
         //On redirige sur la page qui affiche toutes les taches
         return $this->redirectToRoute('listes-details', ['id' => $tacheModificationStatut->getListe()->getId()]);
+    }
+    
+    /**
+     * @Route("/redirection-tache", name="redirection-tache")
+     */
+    public function redirection(){
+        return $this->render('tache/erreurRedirection.html.twig');
     }
 }

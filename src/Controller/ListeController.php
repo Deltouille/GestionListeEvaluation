@@ -142,7 +142,7 @@ class ListeController extends AbstractController
     }
 
     /**
-     * @Route("/redirection", name="redirection")
+     * @Route("/redirection", name="redirection-liste")
      */
     public function redirection(){
         return $this->render('liste/erreurRedirection.html.twig');
