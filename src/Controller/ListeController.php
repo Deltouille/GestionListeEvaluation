@@ -43,7 +43,7 @@ class ListeController extends AbstractController
         $listeDetails = $listeRepository->find($id);
         //On verifie que la liste existe
         if($listeDetails === null){
-            return $this->redirectToRoute('redirection');
+            return $this->redirectToRoute('redirection-liste');
         }
         //On affiche la page du détails de la liste
         return $this->render('liste/details.html.twig', [
@@ -92,7 +92,7 @@ class ListeController extends AbstractController
         $listeModification = $listeRepository->find($id);
         //On verifie que la liste existe
         if($listeModification === null){
-            return $this->redirectToRoute('redirection');
+            return $this->redirectToRoute('redirection-liste');
         }
         //On créer un nouveau formulaire
         $form = $this->createForm(ListeType::class, $listeModification);
@@ -128,7 +128,7 @@ class ListeController extends AbstractController
         $listeSuppression = $listeRepository->find($id);
         //On verifie que la liste existe
         if($listeSuppression === null){
-            return $this->redirectToRoute('redirection');
+            return $this->redirectToRoute('redirection-liste');
         }
         
         foreach($listeSuppression->getTache() as $tache){
