@@ -11,7 +11,7 @@
         {# Nom de la tache #}
         <div class="form-group">
             {# Génération du label #}
-            {{ form_label(form.Nom, "Nom de la liste", {'label_attr': {'class': 'cal-sm-2 control-label'}}) }}
+            {{ form_label(form.Nom, "Nom de la tâche", {'label_attr': {'class': 'cal-sm-2 control-label'}}) }}
             {# Affichage des erreurs pour ce champ précis #}
             {{ form_errors(form.Nom) }}
             <div class="col-sm-10">
@@ -22,7 +22,7 @@
         {# Nom de la tache #}
         <div class="form-group">
             {# Génération du label #}
-            {{ form_label(form.Statut, "Description de la liste", {'label_attr': {'class': 'cal-sm-2 control-label'}}) }}
+            {{ form_label(form.Statut, "Statut de la tâche", {'label_attr': {'class': 'cal-sm-2 control-label'}}) }}
             {# Affichage des erreurs pour ce champ précis #}
             {{ form_errors(form.Statut) }}
             <div class="col-sm-10">
@@ -33,7 +33,7 @@
         {# Liste associée de la tache #}
         <div class="form-group">
             {# Génération du label #}
-            {{ form_label(form.Liste, "Description de la liste", {'label_attr': {'class': 'cal-sm-2 control-label'}}) }}
+            {{ form_label(form.Liste, "Attribuer une liste a la tâche", {'label_attr': {'class': 'cal-sm-2 control-label'}}) }}
             {# Affichage des erreurs pour ce champ précis #}
             {{ form_errors(form.Liste) }}
             <div class="col-sm-10">

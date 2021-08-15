@@ -29,6 +29,7 @@ class CountStatutExtension extends AbstractExtension
             new TwigFunction('getStatutToDo', [$this, 'getStatutToDo']),
             new TwigFunction('getStatutEnCours', [$this, 'getStatutEnCours']),
             new TwigFunction('getStatutTermine', [$this, 'getStatutTermine']),
+            new TwigFunction('getCountTache', [$this, 'getCountTache']),
         ];
     }
 
@@ -60,5 +61,9 @@ class CountStatutExtension extends AbstractExtension
             }
         }
         return $termine;
+    }
+
+    public function getCountTache($tache){
+        return count($tache);
     }
 }
