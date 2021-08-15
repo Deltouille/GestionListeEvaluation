@@ -131,6 +131,7 @@ class TacheController extends AbstractController
         $em->flush();
 
         return $this->redirectToRoute('listes-details', ['id' => $tacheSuppression->getListe()->getId()]);
+        
     }
 
     /**

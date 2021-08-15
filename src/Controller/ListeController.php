@@ -34,7 +34,7 @@ class ListeController extends AbstractController
     /**
      * @Route("/listes-details/{id}", name="listes-details")
      */
-    public function Read(int $id){
+    public function Read(int $id){        
         //On récupere l'entity manager
         $em = $this->getDoctrine()->getManager();
         //On récupere le repository de la classe Liste
