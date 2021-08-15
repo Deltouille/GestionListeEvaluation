@@ -127,7 +127,7 @@ class ListeController extends AbstractController
         //On récupere la liste séléctionnée 
         $listeSuppression = $listeRepository->find($id);
         //On verifie que la liste existe
-        if($listeModification === null){
+        if($listeSuppression === null){
             return $this->redirectToRoute('redirection');
         }
         
@@ -148,4 +148,10 @@ class ListeController extends AbstractController
         return $this->render('liste/erreurRedirection.html.twig');
     }
 
+    /**
+     * @Route("/", name="home")
+     */
+    public function home(){
+        return $this->redirectToRoute('listes');
+    }
 }
